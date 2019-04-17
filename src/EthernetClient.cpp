@@ -100,6 +100,11 @@ int EthernetClient::available()
 	// command to cause the Wiznet chip to resend the ACK packet.
 }
 
+int EthernetClient::free() {
+    if (sockindex >= MAX_SOCK_NUM) return 0;
+    return W5100.readSnTX_FSR(sockindex);
+}
+
 int EthernetClient::read(uint8_t *buf, size_t size)
 {
 	if (sockindex >= MAX_SOCK_NUM) return 0;
